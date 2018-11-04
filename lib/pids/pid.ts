@@ -186,6 +186,34 @@ export class Rpm extends PID {
   }
 }
 
+export class Gear extends PID {
+  constructor () {
+    super({
+      mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
+      pid: 'A4',
+      bytes: 4,
+      min: 0,
+      max: 8,
+      name: 'Transmission Actual Gear',
+      unit: 'gear'
+    })
+  }
+
+  public getValueForBytes (bytes: string[]): number {
+    return parseHexToDecimal(bytes[4]);
+  }
+
+  public getRandomBytes (): string[] {
+    // ensure random value is int, then convert to hex
+    return [
+      (this.getRandomInt(0, 255)%10).toString(16),
+      (this.getRandomInt(0, 255)%10).toString(16),
+      (this.getRandomInt(0, 255)%10).toString(16),
+      (this.getRandomInt(0, 255)%10).toString(16)
+  ];
+  }
+}
+
 export class CoolantTemp extends PID {
   constructor () {
     super({
