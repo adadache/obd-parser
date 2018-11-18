@@ -269,11 +269,24 @@ export class Odometer extends PID {
     })
 
     this.minRandomValue = 0;
-    this.maxRandomValue = 9999;
+    this.maxRandomValue = 255;
   }
 
   public getValueForBytes (bytes: string[]): number {
     return parseHexToDecimal(bytes[4]);
+  }
+
+  public getRandomBytes (min?: number, max?: number): string[] {
+    min = min || this.minRandomValue;
+    max = max || this.maxRandomValue;
+
+    // ensure random value is int, then convert to hex
+    return [
+      this.getRandomInt(min, max).toString(16),
+      this.getRandomInt(min, max).toString(16),
+      this.getRandomInt(min, max).toString(16),
+      this.getRandomInt(min, max).toString(16)
+    ];
   }
 }
 
