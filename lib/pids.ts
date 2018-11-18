@@ -8,6 +8,7 @@ export = {
   Gear: new PIDS.Gear(),
   CoolantTemp: new PIDS.CoolantTemp(),
   VehicleSpeed: new PIDS.VehicleSpeed(),
+  Odometer: new PIDS.Odometer(),
   CalculatedEngineLoad: new PIDS.CalculatedEngineLoad(),
   FuelPressure: new PIDS.FuelPressure(),
   IntakeManifoldAbsolutePressure: new PIDS.IntakeManifoldAbsolutePressure(),

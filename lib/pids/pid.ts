@@ -256,6 +256,27 @@ export class VehicleSpeed extends PID {
   }
 }
 
+export class Odometer extends PID {
+  constructor () {
+    super({
+      mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
+      pid: 'A6',
+      bytes: 4,
+      name: 'Odometer',
+      min: 0,
+      max: 9999,
+      unit: 'hm'
+    })
+
+    this.minRandomValue = 0;
+    this.maxRandomValue = 9999;
+  }
+
+  public getValueForBytes (bytes: string[]): number {
+    return parseHexToDecimal(bytes[4]);
+  }
+}
+
 export class CalculatedEngineLoad extends PID {
   constructor () {
     super({
