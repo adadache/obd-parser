@@ -273,7 +273,11 @@ export class Odometer extends PID {
   }
 
   public getValueForBytes (bytes: string[]): number {
-    return parseHexToDecimal(bytes[4]);
+    let a = parseHexToDecimal(bytes[2])*256;
+    let b = parseHexToDecimal(bytes[3])*256;
+    let c = parseHexToDecimal(bytes[4])*256;
+    let d = parseHexToDecimal(bytes[5]);
+    return (a + b + c + d);
   }
 
   public getRandomBytes (min?: number, max?: number): string[] {
